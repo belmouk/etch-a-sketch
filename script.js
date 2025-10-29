@@ -37,7 +37,8 @@ const generateSession = function () {
     const squareSize = document.querySelector("input");
     const button = document.querySelector("button");
 
-    
+    createCanvas(20);
+    addOneColorHoverEffect("green");
     
 
     button.addEventListener("click", (e) => {
