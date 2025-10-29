@@ -10,6 +10,7 @@ const createCanvas = function (squareSize, canvasSize = 500) {
         item.classList.add("square");
         item.style.width = `${squareSize}px`;
         item.style.height = `${squareSize}px`;
+        item.style.opacity = "0";
     });
 
     canvasSquares.forEach((item) => canvas.appendChild(item));
@@ -20,8 +21,17 @@ const colorSquare = function (square) {
         square.addEventListener("mouseenter", (e) => {
         e.stopPropagation();
         e.target.style.backgroundColor = `rgb(${generateRandomColor().join(",")})`;
+        increaseSquareOpacity(e.target);
         });
 };
+
+const increaseSquareOpacity = function (square) {
+    if (Number(square.style.opacity) < 1) {
+        square.style.opacity = Number(square.style.opacity) + 0.1;
+    } else {
+        square.style.opacity = "1";
+    }
+}
 
 const addHoverEffect = function () {
     const canvas = Array.from(document.querySelectorAll(".square"));
