@@ -45,19 +45,23 @@ const generateRandomColor = function () {
 }
 
 const generateSession = function () {    
-    const resolution = document.querySelector("#canvas-input");
+    const resolutionInput = document.querySelector("#canvas-input");
     const confirmButton = document.querySelector("#confirm");
     const resetButton = document.querySelector("#reset");
 
     createCanvas(10);
     addHoverEffect();
 
+    let resolution = resolutionInput.value;
+
     confirmButton.addEventListener("click", (e) => {
-        createCanvas(resolution.value);
+        resolution = resolutionInput.value;
+        createCanvas(resolution);
+        
     })
 
     resetButton.addEventListener("click", (e) => {
-        createCanvas(resolution.value);
+        createCanvas(resolution);
     })
 
 };
