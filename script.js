@@ -1,16 +1,18 @@
-const createCanvas = function (squareSize, canvasSize = 500) {
+const createCanvas = function (resolution, canvasSize = 500) {
     let canvasSquares = [];
     const canvas = document.querySelector("#canvas");
-    const squareNumber = (canvasSize ** 2) / (squareSize ** 2);
+    const canvasSurface = canvasSize ** 2;
+    const squareSize = Math.sqrt(canvasSurface / resolution);
+    const SQUARE_OPACITY = "0.1";
 
-    for (let i = 0; i < squareNumber; i++) {
+    for (let i = 0; i < resolution; i++) {
         canvasSquares.push(document.createElement("div"));
     }
     canvasSquares.map( item => {
         item.classList.add("square");
         item.style.width = `${squareSize}px`;
         item.style.height = `${squareSize}px`;
-        item.style.opacity = "0";
+        item.style.opacity = SQUARE_OPACITY;
     });
 
     canvasSquares.forEach((item) => canvas.appendChild(item));
@@ -48,22 +50,22 @@ const generateRandomColor = function () {
 }
 
 const generateSession = function () {    
-    const squareSize = document.querySelector("input");
+    const resolution = document.querySelector("input");
     const confirmButton = document.querySelector("#confirm");
     const resetButton = document.querySelector("#reset");
 
-    createCanvas(20);
+    createCanvas(730);
     addHoverEffect();
 
     confirmButton.addEventListener("click", (e) => {
         clearCanvas();
-        createCanvas(squareSize.value);
+        createCanvas(resolution.value);
         addHoverEffect();
     })
 
     resetButton.addEventListener("click", (e) => {
         clearCanvas();
-        createCanvas(squareSize.value);
+        createCanvas(resolution.value);
         addHoverEffect();
     })
 
