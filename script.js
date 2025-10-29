@@ -1,10 +1,17 @@
-const createCanvas = function (canvasSize) {
+const createCanvas = function (squareSize, canvasSize = 500) {
     let canvasSquares = [];
     const canvas = document.querySelector("#canvas");
-    for (let i = 0; i < canvasSize; i++) {
+    const squareNumber = (canvasSize ** 2) / (squareSize ** 2);
+
+    for (let i = 0; i < squareNumber; i++) {
         canvasSquares.push(document.createElement("div"));
     }
-    canvasSquares.map( item => item.classList.add("square"));
+    canvasSquares.map( item => {
+        item.classList.add("square");
+        item.style.width = `${squareSize}px`;
+        item.style.height = `${squareSize}px`;
+    });
+
     canvasSquares.forEach((item) => canvas.appendChild(item));
 };
 
@@ -21,5 +28,23 @@ const addOneColorHoverEffect = function (color) {
     canvas.forEach(square => colorSquare(square, color));
 };
 
-createCanvas(60);
-addOneColorHoverEffect("green");
+const clearCanvas = function () {
+    const canvas = document.querySelector("#canvas");
+    canvas.replaceChildren();
+}
+
+const generateSession = function () {    
+    const squareSize = document.querySelector("input");
+    const button = document.querySelector("button");
+
+    
+    
+
+    button.addEventListener("click", (e) => {
+        clearCanvas();
+        createCanvas(squareSize.value);
+        addOneColorHoverEffect("green");
+    })
+};
+
+generateSession();
