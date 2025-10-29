@@ -33,10 +33,13 @@ body {
     flex-shrink: 0;
     padding: 0px;
     margin: 0px;
+    border: 1px solid black;
+    overflow: hidden;
 }
 
 .square {
     border: 1px solid black;
+    flex-grow: 1;
 }
 
 #user-interface {
