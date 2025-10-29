@@ -1,17 +1,20 @@
 const createCanvas = function (resolution, canvasSize = 500) {
     let canvasSquares = [];
     const canvas = document.querySelector("#canvas");
-    const canvasSurface = canvasSize ** 2;
-    const squareSize = Math.sqrt(canvasSurface / resolution);
+    const squareSize = Math.floor(canvasSize / resolution);
     const SQUARE_OPACITY = "0.1";
 
-    for (let i = 0; i < resolution; i++) {
+    canvas.style.width = `${squareSize * resolution}px`;
+    canvas.style.height = `${squareSize * resolution}px`;
+
+    for (let i = 0; i < resolution ** 2; i++) {
         canvasSquares.push(document.createElement("div"));
     }
     canvasSquares.map( item => {
         item.classList.add("square");
         item.style.width = `${squareSize}px`;
         item.style.height = `${squareSize}px`;
+        item.style.flex = `0 0 ${squareSize}px`;
         item.style.opacity = SQUARE_OPACITY;
     });
 
@@ -54,7 +57,7 @@ const generateSession = function () {
     const confirmButton = document.querySelector("#confirm");
     const resetButton = document.querySelector("#reset");
 
-    createCanvas(730);
+    createCanvas(10);
     addHoverEffect();
 
     confirmButton.addEventListener("click", (e) => {

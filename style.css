@@ -23,6 +23,7 @@ body {
     justify-content: center;
     align-items: center;
     flex: 1;
+    border: 1px solid black;
 }
 
 #canvas {
@@ -33,13 +34,12 @@ body {
     flex-shrink: 0;
     padding: 0px;
     margin: 0px;
-    border: 1px solid black;
-    overflow: hidden;
 }
 
 .square {
     border: 1px solid black;
-    flex-grow: 1;
+    flex-grow: 0 0 auto;
+
 }
 
 #user-interface {
