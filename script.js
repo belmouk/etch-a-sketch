@@ -16,21 +16,25 @@ const createCanvas = function (squareSize, canvasSize = 500) {
 };
 
 
-const colorSquare = function (square, color) {
+const colorSquare = function (square) {
         square.addEventListener("mouseenter", (e) => {
         e.stopPropagation();
-        e.target.style.backgroundColor = color;
+        e.target.style.backgroundColor = `rgb(${generateRandomColor().join(",")})`;
         });
 };
 
-const addOneColorHoverEffect = function (color) {
+const addHoverEffect = function () {
     const canvas = Array.from(document.querySelectorAll(".square"));
-    canvas.forEach(square => colorSquare(square, color));
+    canvas.forEach(colorSquare);
 };
 
 const clearCanvas = function () {
     const canvas = document.querySelector("#canvas");
     canvas.replaceChildren();
+}
+
+const generateRandomColor = function () {
+    return Array.from({ length: 3}, (_, num) => Math.floor(Math.random() * 256));
 }
 
 const generateSession = function () {    
@@ -39,19 +43,18 @@ const generateSession = function () {
     const resetButton = document.querySelector("#reset");
 
     createCanvas(20);
-    addOneColorHoverEffect("green");
-    
+    addHoverEffect();
 
     confirmButton.addEventListener("click", (e) => {
         clearCanvas();
         createCanvas(squareSize.value);
-        addOneColorHoverEffect("green");
+        addHoverEffect();
     })
 
     resetButton.addEventListener("click", (e) => {
         clearCanvas();
         createCanvas(squareSize.value);
-        addOneColorHoverEffect("green");
+        addHoverEffect();
     })
 
 };
