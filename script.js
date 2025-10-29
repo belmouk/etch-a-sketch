@@ -1,11 +1,11 @@
 createCanvas = function (canvasSize) {
-    let canvas = [];
-    const canvasContainer = document.querySelector("#canvas-container");
+    let canvasSquares = [];
+    const canvas = document.querySelector("#canvas");
     for (let i = 0; i < canvasSize; i++) {
-        canvas.push(document.createElement("div"));
+        canvasSquares.push(document.createElement("div"));
     }
-    canvas.map( item => item.classList.add("square"));
-    canvas.forEach((item) => canvasContainer.appendChild(item));
+    canvasSquares.map( item => item.classList.add("square"));
+    canvasSquares.forEach((item) => canvas.appendChild(item));
 }
 
 createCanvas(16);
