@@ -1,34 +1,24 @@
 const createCanvas = function (resolution, canvasSize = 500) {
-    let canvasSquares = [];
     const canvas = document.querySelector("#canvas");
     const squareSize = Math.floor(canvasSize / resolution);
     const SQUARE_OPACITY = "0.1";
+
+    canvas.replaceChildren()
 
     canvas.style.width = `${squareSize * resolution}px`;
     canvas.style.height = `${squareSize * resolution}px`;
 
     for (let i = 0; i < resolution ** 2; i++) {
-        canvasSquares.push(document.createElement("div"));
+        const square = document.createElement("div");
+        square.classList.add("square");
+        square.style.width = `${squareSize}px`;
+        square.style.height = `${squareSize}px`;
+        square.style.flex = `0 0 ${squareSize}px`;
+        square.style.opacity = SQUARE_OPACITY;
+        canvas.appendChild(square);
     }
-    canvasSquares.map( item => {
-        item.classList.add("square");
-        item.style.width = `${squareSize}px`;
-        item.style.height = `${squareSize}px`;
-        item.style.flex = `0 0 ${squareSize}px`;
-        item.style.opacity = SQUARE_OPACITY;
-    });
-
-    canvasSquares.forEach((item) => canvas.appendChild(item));
 };
 
-
-const colorSquare = function (square) {
-        square.addEventListener("mouseenter", (e) => {
-        e.stopPropagation();
-        e.target.style.backgroundColor = `rgb(${generateRandomColor().join(",")})`;
-        increaseSquareOpacity(e.target);
-        });
-};
 
 const increaseSquareOpacity = function (square) {
     if (Number(square.style.opacity) < 1) {
@@ -39,21 +29,23 @@ const increaseSquareOpacity = function (square) {
 }
 
 const addHoverEffect = function () {
-    const canvas = Array.from(document.querySelectorAll(".square"));
-    canvas.forEach(colorSquare);
-};
-
-const clearCanvas = function () {
     const canvas = document.querySelector("#canvas");
-    canvas.replaceChildren();
-}
+
+    canvas.addEventListener("mouseover", (e) => {
+        if (e.target.classList.contains("square")) {
+            e.stopPropagation();
+            e.target.style.backgroundColor = `rgb(${generateRandomColor().join(",")})`;
+            increaseSquareOpacity(e.target);
+        }
+    });
+};
 
 const generateRandomColor = function () {
     return Array.from({ length: 3}, (_, num) => Math.floor(Math.random() * 256));
 }
 
 const generateSession = function () {    
-    const resolution = document.querySelector("input");
+    const resolution = document.querySelector("#canvas-input");
     const confirmButton = document.querySelector("#confirm");
     const resetButton = document.querySelector("#reset");
 
@@ -61,15 +53,11 @@ const generateSession = function () {
     addHoverEffect();
 
     confirmButton.addEventListener("click", (e) => {
-        clearCanvas();
         createCanvas(resolution.value);
-        addHoverEffect();
     })
 
     resetButton.addEventListener("click", (e) => {
-        clearCanvas();
         createCanvas(resolution.value);
-        addHoverEffect();
     })
 
 };
