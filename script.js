@@ -35,17 +35,25 @@ const clearCanvas = function () {
 
 const generateSession = function () {    
     const squareSize = document.querySelector("input");
-    const button = document.querySelector("button");
+    const confirmButton = document.querySelector("#confirm");
+    const resetButton = document.querySelector("#reset");
 
     createCanvas(20);
     addOneColorHoverEffect("green");
     
 
-    button.addEventListener("click", (e) => {
+    confirmButton.addEventListener("click", (e) => {
         clearCanvas();
         createCanvas(squareSize.value);
         addOneColorHoverEffect("green");
     })
+
+    resetButton.addEventListener("click", (e) => {
+        clearCanvas();
+        createCanvas(squareSize.value);
+        addOneColorHoverEffect("green");
+    })
+
 };
 
 generateSession();
